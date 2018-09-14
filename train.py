@@ -25,14 +25,14 @@ tf.flags.DEFINE_string("database_path", "data/", "Path for the dataset to be use
 # Model Hyperparameters
 tf.flags.DEFINE_integer("sequence_length", 140, "Sequence Max Length (default: 1024)")
 tf.flags.DEFINE_string("pool_type", "max", "Types of downsampling methods, use either three of max (maxpool), k_max (k-maxpool) or conv (linear) (default: 'max')")
-tf.flags.DEFINE_integer("depth", 17, "Depth for VDCNN, use either 9, 17, 29 or 47 (default: 9)")
+tf.flags.DEFINE_integer("depth", 27, "Depth for VDCNN, use either 9, 17, 29 or 47 (default: 9)")
 tf.flags.DEFINE_boolean("shortcut", False, "Use optional shortcut (default: False)")
 tf.flags.DEFINE_boolean("sorted", False, "Sort during k-max pooling (default: False)")
 tf.flags.DEFINE_boolean("use_bias", False, "Use bias for all conv1d layers (default: False)")
 
 # Training parameters
-flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
-flags.DEFINE_integer("num_epochs", 100, "Number of training epochs (default: 100)")
+flags.DEFINE_integer("batch_size", 128, "Batch Size (default: 64)")
+flags.DEFINE_integer("num_epochs", 200, "Number of training epochs (default: 100)")
 flags.DEFINE_integer("evaluate_every", 100, "Evaluate model on test set after this many steps (default: 100)")
 
 FLAGS = flags.FLAGS
