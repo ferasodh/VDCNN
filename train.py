@@ -14,6 +14,7 @@ import math
 import sys
 import datetime
 
+from CyclicLR import CyclicLR
 from vdcnn import *
 from data_helper import *
 import custom_callbacks
@@ -23,7 +24,7 @@ from sklearn.utils import class_weight
 tf.flags.DEFINE_string("database_path", "data/", "Path for the dataset to be used.")
 
 # Model Hyperparameters
-tf.flags.DEFINE_integer("sequence_length", 140, "Sequence Max Length (default: 1024)")
+tf.flags.DEFINE_integer("sequence_length", 1024, "Sequence Max Length (default: 1024)")
 tf.flags.DEFINE_string("pool_type", "max", "Types of downsampling methods, use either three of max (maxpool), k_max (k-maxpool) or conv (linear) (default: 'max')")
 tf.flags.DEFINE_integer("depth", 29, "Depth for VDCNN, use either 9, 17, 29 or 47 (default: 9)")
 tf.flags.DEFINE_boolean("shortcut", False, "Use optional shortcut (default: False)")
@@ -91,9 +92,12 @@ def train(x_train, y_train, x_test, y_test):
     loss_history = custom_callbacks.loss_history(model, tensorboard)
     evaluate_step = custom_callbacks.evaluate_step(model, checkpointer, tensorboard, FLAGS.evaluate_every, FLAGS.batch_size, x_test, y_test)
 
+    clr = CyclicLR(base_lr=0.004, max_lr=0.01, step_size=2000., mode='triangular',
+                   gamma=0.99994)
+
     # Fit model
     model.fit(x_train, y_train, batch_size=FLAGS.batch_size, epochs=FLAGS.num_epochs, validation_data=(x_test, y_test),class_weight=class_weight_dict ,
-              verbose=1, callbacks=[checkpointer, tensorboard, loss_history, evaluate_step])
+              verbose=1, callbacks=[checkpointer, tensorboard, loss_history, evaluate_step,clr])
     print('-'*30)
     time_str = datetime.datetime.now().isoformat()
     print("{}: Done training.".format(time_str))
