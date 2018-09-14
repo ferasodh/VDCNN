@@ -20,7 +20,7 @@ import custom_callbacks
 
 # Parameters settings
 # Data loading params
-tf.flags.DEFINE_string("database_path", "dataset/ag_news_csv/", "Path for the dataset to be used.")
+tf.flags.DEFINE_string("database_path", "data/", "Path for the dataset to be used.")
 
 # Model Hyperparameters
 tf.flags.DEFINE_integer("sequence_length", 1024, "Sequence Max Length (default: 1024)")
