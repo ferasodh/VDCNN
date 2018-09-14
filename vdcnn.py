@@ -100,7 +100,7 @@ def VDCNN(num_classes, depth=9, sequence_length=1024, embedding_dim=16,
     # Dense Layers
     out = Dense(2048, activation='relu')(out)
     out = Dense(2048, activation='relu')(out)
-    out = Dense(num_classes, activation='softmax')(out)
+    out = Dense(num_classes, activation='sigmoid')(out)
 
     if input_tensor is not None:
         inputs = get_source_inputs(input_tensor)
