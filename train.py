@@ -59,11 +59,12 @@ def preprocess():
 def train(x_train, y_train, x_test, y_test):
     # Init Keras Model here
 
-    class_weights = class_weight.compute_class_weight('balanced',
-                                                      np.unique(y_train),
-                                                      y_train)
+    # class_weights = class_weight.compute_class_weight('balanced',
+    #                                                   np.unique(y_train),
+    #                                                   y_train)
+    class_weight_dict = {0: 0.7,1: 1.6}
 
-    class_weight_dict = dict(enumerate(class_weights))
+    # class_weight_dict = dict(enumerate(class_weights))
 
     model = VDCNN(num_classes=y_train.shape[1], 
                   depth=FLAGS.depth, 
