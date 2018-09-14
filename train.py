@@ -23,7 +23,7 @@ import custom_callbacks
 tf.flags.DEFINE_string("database_path", "data/", "Path for the dataset to be used.")
 
 # Model Hyperparameters
-tf.flags.DEFINE_integer("sequence_length", 1024, "Sequence Max Length (default: 1024)")
+tf.flags.DEFINE_integer("sequence_length", 140, "Sequence Max Length (default: 1024)")
 tf.flags.DEFINE_string("pool_type", "max", "Types of downsampling methods, use either three of max (maxpool), k_max (k-maxpool) or conv (linear) (default: 'max')")
 tf.flags.DEFINE_integer("depth", 9, "Depth for VDCNN, use either 9, 17, 29 or 47 (default: 9)")
 tf.flags.DEFINE_boolean("shortcut", False, "Use optional shortcut (default: False)")

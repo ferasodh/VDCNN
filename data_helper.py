@@ -8,7 +8,7 @@ import random
 from sklearn.model_selection import train_test_split
 
 class data_helper():
-	def __init__(self, sequence_max_length=1024):
+	def __init__(self, sequence_max_length=140):
 		self.alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’"/|_#$%ˆ&*˜‘+=<>()[]{} '
 		self.char_dict = {}
 		self.sequence_max_length = sequence_max_length
@@ -17,8 +17,10 @@ class data_helper():
 
 	def char2vec(self, text):
 		data = np.zeros(self.sequence_max_length)
+
 		for i in range(0, len(text)):
-			if i > self.sequence_max_length:
+
+			if i > self.sequence_max_length-1:
 				return data
 			elif text[i] in self.char_dict:
 				data[i] = self.char_dict[text[i]]
