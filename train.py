@@ -17,7 +17,7 @@ import datetime
 from vdcnn import *
 from data_helper import *
 import custom_callbacks
-
+from sklearn.utils import class_weight
 # Parameters settings
 # Data loading params
 tf.flags.DEFINE_string("database_path", "data/", "Path for the dataset to be used.")
@@ -58,6 +58,13 @@ def preprocess():
 
 def train(x_train, y_train, x_test, y_test):
     # Init Keras Model here
+
+    class_weights = class_weight.compute_class_weight('balanced',
+                                                      np.unique(y_train),
+                                                      y_train)
+
+    class_weight_dict = dict(enumerate(class_weights))
+
     model = VDCNN(num_classes=y_train.shape[1], 
                   depth=FLAGS.depth, 
                   sequence_length=FLAGS.sequence_length, 
@@ -66,7 +73,7 @@ def train(x_train, y_train, x_test, y_test):
                   sorted=FLAGS.sorted, 
                   use_bias=FLAGS.use_bias)
 
-    model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=SGD(lr=0.01, momentum=0.9), loss='binary_crossentropy', metrics=['accuracy'])
 
     model_json = model.to_json()
     with open("vdcnn_model.json","w") as json_file:
@@ -84,7 +91,7 @@ def train(x_train, y_train, x_test, y_test):
     evaluate_step = custom_callbacks.evaluate_step(model, checkpointer, tensorboard, FLAGS.evaluate_every, FLAGS.batch_size, x_test, y_test)
 
     # Fit model
-    model.fit(x_train, y_train, batch_size=FLAGS.batch_size, epochs=FLAGS.num_epochs, validation_data=(x_test, y_test), 
+    model.fit(x_train, y_train, batch_size=FLAGS.batch_size, epochs=FLAGS.num_epochs, validation_data=(x_test, y_test),class_weight=class_weight_dict ,
               verbose=1, callbacks=[checkpointer, tensorboard, loss_history, evaluate_step])
     print('-'*30)
     time_str = datetime.datetime.now().isoformat()
