@@ -5,6 +5,8 @@ import csv
 import numpy as np
 import random
 
+from sklearn.model_selection import train_test_split
+
 class data_helper():
 	def __init__(self, sequence_max_length=1024):
 		self.alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’"/|_#$%ˆ&*˜‘+=<>()[]{} '
@@ -45,18 +47,22 @@ class data_helper():
 		f.close()
 		return np.array(all_data), np.array(labels)
 
+
 	def load_dataset(self, dataset_path):
 		# Read Classes Info
-		with open(dataset_path+"classes.txt") as f:
-			classes = []
-			for line in f:
-				classes.append(line.strip())
-		f.close()
-		num_classes = len(classes)
+		# with open(dataset_path+"classes.txt") as f:
+		# 	classes = []
+		# 	for line in f:
+		# 		classes.append(line.strip())
+		# f.close()
+		num_classes = 2 #len(classes)
 		# Read CSV Info
-		train_data, train_label = self.load_csv_file(dataset_path+'train.csv', num_classes)
-		test_data, test_label = self.load_csv_file(dataset_path+'test.csv', num_classes)
-		return train_data, train_label, test_data, test_label
+
+		X, y = self.load_csv_file(dataset_path + 'tweets.csv', num_classes)
+		# train_data, train_label = self.load_csv_file(dataset_path+'train.csv', num_classes)
+		# test_data, test_label = self.load_csv_file(dataset_path+'test.csv', num_classes)
+		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+		return X_train, y_train, X_test, y_test
 
 	def batch_iter(self, data, batch_size, num_epochs, shuffle=True):
 		"""
