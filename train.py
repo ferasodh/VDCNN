@@ -15,6 +15,7 @@ import sys
 import datetime
 
 from CyclicLR import CyclicLR
+from metrics import Metrics
 from vdcnn import *
 from data_helper import *
 import custom_callbacks
@@ -94,10 +95,12 @@ def train(x_train, y_train, x_test, y_test):
 
     clr = CyclicLR(base_lr=0.004, max_lr=0.01, step_size=2000., mode='triangular',
                    gamma=0.99994)
+    validation_data=(x_test, y_test)
+    metrics = Metrics(validation_data)
 
     # Fit model
     model.fit(x_train, y_train, batch_size=FLAGS.batch_size, epochs=FLAGS.num_epochs, validation_data=(x_test, y_test),class_weight=class_weight_dict ,
-              verbose=1, callbacks=[checkpointer, tensorboard, loss_history, evaluate_step,clr])
+              verbose=1, callbacks=[checkpointer, tensorboard, loss_history, evaluate_step,clr,metrics])
     print('-'*30)
     time_str = datetime.datetime.now().isoformat()
     print("{}: Done training.".format(time_str))
