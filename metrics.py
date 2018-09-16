@@ -1,6 +1,7 @@
 from sklearn.metrics import *
 
 from keras.callbacks import Callback
+import numpy as np
 
 class Metrics(Callback):
 
