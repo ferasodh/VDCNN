@@ -63,7 +63,7 @@ class data_helper():
 		X, y = self.load_csv_file(dataset_path + 'tweets.csv', num_classes)
 		# train_data, train_label = self.load_csv_file(dataset_path+'train.csv', num_classes)
 		# test_data, test_label = self.load_csv_file(dataset_path+'test.csv', num_classes)
-		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
 		return X_train, y_train, X_test, y_test
 
 	def batch_iter(self, data, batch_size, num_epochs, shuffle=True):

@@ -67,7 +67,7 @@ def train(x_train, y_train, x_test, y_test):
 
     # class_weight_dict = dict(enumerate(class_weights))
 
-    model = VDCNN(num_classes=y_train.shape[1], 
+    model = VDCNN(num_classes=1,#y_train.shape[1]
                   depth=FLAGS.depth, 
                   sequence_length=FLAGS.sequence_length, 
                   shortcut=FLAGS.shortcut,
