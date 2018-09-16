@@ -8,7 +8,7 @@ import random
 from sklearn.model_selection import train_test_split
 
 class data_helper():
-	def __init__(self, sequence_max_length=1024):
+	def __init__(self, sequence_max_length=140):
 		self.alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789-,;.!?:’"/|_#$%ˆ&*˜‘+=<>()[]{} '
 		self.char_dict = {}
 		self.sequence_max_length = sequence_max_length
@@ -57,7 +57,7 @@ class data_helper():
 		# 	for line in f:
 		# 		classes.append(line.strip())
 		# f.close()
-		num_classes = 2 #len(classes)
+		num_classes = 1 #len(classes)
 		# Read CSV Info
 
 		X, y = self.load_csv_file(dataset_path + 'tweets.csv', num_classes)
