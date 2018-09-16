@@ -40,7 +40,8 @@ class data_helper():
 			for row in reader:
 				# One-hot
 				one_hot = np.zeros(num_classes)
-				one_hot[int(row['class']) - 1] = 1
+				one_hot[0] = row['class']  #= np.zeros(num_classes)
+				# one_hot[int(row['class']) - 1] = 1
 				labels.append(one_hot)
 				# Char2vec
 				data = np.ones(self.sequence_max_length)*68
