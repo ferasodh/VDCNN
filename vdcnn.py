@@ -1,7 +1,7 @@
 import keras
 from keras.models import Model
 from keras.layers import Input, Embedding, Conv1D, BatchNormalization, Activation, Add, MaxPooling1D, Dense, Flatten, \
-    SpatialDropout1D
+    SpatialDropout1D, Dropout
 from keras.engine.topology import get_source_inputs
 from k_maxpooling import *
 
@@ -100,9 +100,9 @@ def VDCNN(num_classes, depth=9, sequence_length=1024, embedding_dim=16,
 
     # Dense Layers
     out = Dense(2048, activation='relu')(out)
-    out = SpatialDropout1D(0.6)(out)
+    out = Dropout(0.6)(out)
     out = Dense(2048, activation='relu')(out)
-    out = SpatialDropout1D(0.6)(out)
+    out = Dropout(0.6)(out)
     out = Dense(num_classes, activation='sigmoid')(out)
 
     if input_tensor is not None:
