@@ -67,6 +67,22 @@ class data_helper():
 		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
 		return X_train, y_train, X_test, y_test
 
+	def load_dataset_without_split(self, dataset_path):
+		# Read Classes Info
+		# with open(dataset_path+"classes.txt") as f:
+		# 	classes = []
+		# 	for line in f:
+		# 		classes.append(line.strip())
+		# f.close()
+		num_classes = 1 #len(classes)
+		# Read CSV Info
+
+		X, y = self.load_csv_file(dataset_path + 'tweets.csv', num_classes)
+		# train_data, train_label = self.load_csv_file(dataset_path+'train.csv', num_classes)
+		# test_data, test_label = self.load_csv_file(dataset_path+'test.csv', num_classes)
+		# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
+		return X, y
+
 	def batch_iter(self, data, batch_size, num_epochs, shuffle=True):
 		"""
 		Generates a batch iterator for a dataset.
