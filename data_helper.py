@@ -22,7 +22,7 @@ class data_helper():
 
 		for i in range(0, len(text)):
 
-			if i > self.sequence_max_length-1:
+			if i > self.sequence_max_length - 1:
 				return data
 			elif text[i] in self.char_dict:
 				data[i] = self.char_dict[text[i]]
