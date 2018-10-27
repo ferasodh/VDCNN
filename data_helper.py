@@ -1,3 +1,5 @@
+#!/usr/bin/python
+# -*- coding: ascii -*-
 """
 data helper to preprocess csv format text dataset
 """
