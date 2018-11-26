@@ -27,7 +27,7 @@ tf.flags.DEFINE_string("database_path", "data/", "Path for the dataset to be use
 # Model Hyperparameters
 tf.flags.DEFINE_integer("sequence_length", 1024, "Sequence Max Length (default: 1024)")
 tf.flags.DEFINE_string("pool_type", "max", "Types of downsampling methods, use either three of max (maxpool), k_max (k-maxpool) or conv (linear) (default: 'max')")
-tf.flags.DEFINE_integer("depth", 29, "Depth for VDCNN, use either 9, 17, 29 or 47 (default: 9)")
+tf.flags.DEFINE_integer("depth", 9, "Depth for VDCNN, use either 9, 17, 29 or 47 (default: 9)")
 tf.flags.DEFINE_boolean("shortcut", True, "Use optional shortcut (default: False)")
 tf.flags.DEFINE_boolean("sorted", False, "Sort during k-max pooling (default: False)")
 tf.flags.DEFINE_boolean("use_bias", True, "Use bias for all conv1d layers (default: False)")
