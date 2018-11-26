@@ -61,7 +61,7 @@ class data_helper():
 		num_classes = 1 #len(classes)
 		# Read CSV Info
 
-		X, y = self.load_csv_file(dataset_path + 'tweets.csv', num_classes)
+		X, y = self.load_csv_file(dataset_path + 'ADE.csv', num_classes)
 		# train_data, train_label = self.load_csv_file(dataset_path+'train.csv', num_classes)
 		# test_data, test_label = self.load_csv_file(dataset_path+'test.csv', num_classes)
 		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1)
